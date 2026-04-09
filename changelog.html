@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HOTZONE | Changelog</title>
+
+<style>
+:root {
+    --navy: #0b1f3a;
+    --dark-navy: #08162a;
+    --accent: #c5a46d;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --border: #d6d6d6;
+    --bg: #f4f6f8;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* top nav */
+.nav {
+    background: var(--navy);
+    padding: 10px 20px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 0.9rem;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+/* header */
+header {
+    background: white;
+    border-bottom: 2px solid var(--border);
+    padding: 25px 20px;
+}
+
+header h1 {
+    margin: 0;
+    color: var(--navy);
+}
+
+/* container */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* selector box */
+.section {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* entries */
+.entry {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.entry h3 {
+    margin: 0;
+    color: var(--navy);
+}
+
+.date {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+ul {
+    margin-top: 10px;
+    padding-left: 18px;
+    color: var(--muted);
+}
+
+/* select */
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid var(--border);
+}
+
+/* footer */
+footer {
+    text-align: center;
+    padding: 25px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+    <a href="index.html">Home</a>
+    <a href="changelog.html">Changelog</a>
+</div>
+
+<header>
+    <h1>HOTZONE Changelog</h1>
+</header>
+
+<div class="container">
+
+    <!-- selector -->
+    <div class="section">
+        <label><b>Select Version</b></label>
+        <select id="versionSelect" onchange="filterChangelog()">
+            <option value="all">All Versions</option>
+            <option value="v0.1">v0.1 - Pre-Alpha Release</option>
+            <option value="v0.1.1">v0.2 - Bugs N Guns!</option>
+        </select>
+    </div>
+
+    <!-- entries -->
+    <div class="entry" data-version="v0.1">
+        <h3>Pre-Alpha Release v0.1</h3>
+        <div class="date">April 2026</div>
+        <ul>
+            <li>Recruitment portal launched</li>
+            <li>Pre-alpha release</li>
+            <li>Application system implemented</li>
+            <li>Website release</li>
+            <li>Vehicle framework added</li>
+            <li>Wiki made - https://hotzone.fandom.com/wiki/HOTZONE_Wiki</li>
+        </ul>
+    </div>
+
+    <div class="entry" data-version="v0.1.1">
+        <h3>Bugs N Guns</h3>
+        <div class="date">April 2026</div>
+        <ul>
+            <li>Website improvements</li>
+            <li>Bug fixes in form system</li>
+            <li>Balance adjustments</li>
+            <li>Fixed multiple bugs</li>
+            <li>Started to implement a very early infantry system with weapons</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 HOTZONE Military Simulation Project
+</footer>
+
+<script>
+function filterChangelog() {
+    const val = document.getElementById("versionSelect").value;
+    const entries = document.querySelectorAll(".entry");
+
+    entries.forEach(e => {
+        e.style.display = (val === "all" || e.dataset.version === val)
+            ? "block"
+            : "none";
+    });
+}
+</script>
+
+</body>
+</html>
