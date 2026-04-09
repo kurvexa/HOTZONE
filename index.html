@@ -1,222 +1,280 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NATO VS RF | ROBLOX MILSIM</title>
-    <style>
-        :root {
-            --primary-amber: #ffb400;
-            --nato-blue: #004990;
-            --ru-red: #8b0000;
-            --bg-dark: #0a0a0a;
-            --panel-bg: #151515;
-            --text-gray: #b0b0b0;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HOTZONE | Military Simulation Recruitment Portal</title>
 
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            line-height: 1.6;
-            background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
+<style>
+:root {
+    --navy: #0b1f3a;
+    --dark-navy: #08162a;
+    --accent: #c5a46d;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --border: #d6d6d6;
+    --bg: #f4f6f8;
+}
 
-        header {
-            border-bottom: 2px solid var(--primary-amber);
-            padding: 20px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .status-bar {
-            background: var(--primary-amber);
-            color: black;
-            font-weight: bold;
-            padding: 5px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-        }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 20px;
-        }
+/* Top Bar */
+.top-bar {
+    background: var(--navy);
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+}
 
-        .briefing-box {
-            border-left: 4px solid var(--primary-amber);
-            background: var(--panel-bg);
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 15px rgba(255, 180, 0, 0.1);
-        }
+/* Header */
+header {
+    background: white;
+    border-bottom: 2px solid var(--border);
+    padding: 25px 20px;
+}
 
-        h2 {
-            text-transform: uppercase;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
-        }
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: var(--navy);
+}
 
-        .faction-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+header p {
+    margin: 5px 0 0;
+    color: var(--muted);
+}
 
-        .faction-card {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 20px;
-            border: 1px solid #333;
-        }
+/* Layout */
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
 
-        .nato-header { border-top: 4px solid var(--nato-blue); }
-        .ru-header { border-top: 4px solid var(--ru-red); }
+/* Sections */
+.section {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-        .unit-list {
-            list-style: none;
-            padding: 0;
-        }
+.section h2 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-top: 0;
+}
 
-        .unit-list li {
-            padding: 8px 0;
-            border-bottom: 1px dotted #444;
-            color: var(--text-gray);
-        }
+/* Factions */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        .unit-list li:before {
-            content: "[EXE] ";
-            color: var(--primary-amber);
-            font-size: 0.8rem;
-        }
+.card {
+    border: 1px solid var(--border);
+    padding: 15px;
+    background: #fff;
+}
 
-        .alert-box {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid var(--ru-red);
-            padding: 15px;
-            text-align: center;
-            margin-top: 30px;
-        }
+.card h3 {
+    margin-top: 0;
+    font-size: 1rem;
+}
 
-        .btn-enlist {
-            display: inline-block;
-            background: var(--primary-amber);
-            color: black;
-            padding: 15px 40px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
+.nato h3 {
+    color: #1f4e8c;
+}
 
-        .btn-enlist:hover {
-            background: white;
-            box-shadow: 0 0 20px var(--primary-amber);
-        }
+.rf h3 {
+    color: #8c1f1f;
+}
 
-        .glitch {
-            animation: glitch 1s linear infinite;
-        }
+/* Lists */
+ul {
+    padding-left: 18px;
+    margin: 10px 0 0;
+}
 
-        @keyframes glitch {
-            2%, 64% { transform: translate(2px,0) skew(0deg); }
-            4%, 60% { transform: translate(-2px,0) skew(0deg); }
-            62% { transform: translate(0,0) skew(5deg); }
-        }
+li {
+    margin-bottom: 6px;
+    color: var(--muted);
+}
 
-        @media (max-width: 768px) {
-            .faction-split { grid-template-columns: 1fr; }
-        }
-    </style>
+/* Form */
+form {
+    display: grid;
+    gap: 12px;
+    max-width: 600px;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--navy);
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid var(--border);
+    font-family: Arial;
+    font-size: 0.95rem;
+    background: white;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background: #122c52;
+}
+
+.note {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<div class="status-bar">
-    System Status: Pre-Alpha Phase | HOTZONE
+<div class="top-bar">
+    <span>HOTZONE Military Simulation Portal</span>
+    <span>Pre-Alpha Recruitment System</span>
 </div>
 
 <header>
-    <h1 class="glitch">HOTZONE</h1>
-    <p>ROBLOX Milsim Portal</p>
+    <h1>HOTZONE</h1>
+    <p>Official Enlistment & Assignment Portal</p>
 </header>
 
 <div class="container">
-    
-    <section class="briefing-box">
-        <h2>Mission Briefing</h2>
-        <p>Following a proxy strike on the U.S. backed by the Russian Federation, NATO forces have launched a counter-offensive. Become NATO divisions pushing across the Russian border to dismantle strategic assets, or fight on the aggressor's side to defend sovereign territory.</p>
-        <p><strong>RECRUITMENT STATUS:</strong> <span style="color: var(--primary-amber);">WHITELIST REQUIRED</span></p>
-    </section>
 
-    <div class="faction-split">
-        <div class="faction-card nato-header">
-            <h3 style="color: var(--nato-blue);">NATO FORCES</h3>
-            <ul class="unit-list">
-                <li>1st Cavalry Division</li>
-                <li>1st Infantry Division</li>
-                <li>12th Combat Aviation BDE</li>
-                <li>160th SOAR <small>(Assigned Missions Only)</small></li>
-            </ul>
-        </div>
+    <div class="section">
+        <h2>Operational Overview</h2>
+        <p>
+            Following a coordinated proxy escalation involving the Russian Federation,
+            NATO forces have initiated a structured counter-offensive campaign to secure
+            strategic regions and restore operational stability.
+        </p>
+        <p class="note">
+            Recruitment is currently restricted to whitelist approval during pre-alpha operations.
+        </p>
+    </div>
 
-        <div class="faction-card ru-header">
-            <h3 style="color: var(--ru-red);">RUSSIAN FEDERATION</h3>
-            <ul class="unit-list">
-                <li>4-я гвардейская танковая дивизия</li>
-                <li>19-я отдельная мотострелковая бригада</li>
-                <li>18-я бригада армейской авиации</li>
-            </ul>
+    <div class="section">
+        <h2>Available Force Structure</h2>
+
+        <div class="grid">
+
+            <div class="card nato">
+                <h3>NATO Forces</h3>
+                <ul>
+                    <li>1st Cavalry Division</li>
+                    <li>1st Infantry Division</li>
+                    <li>12th Combat Aviation Brigade</li>
+                    <li>160th SOAR (Special Missions)</li>
+                </ul>
+            </div>
+
+            <div class="card rf">
+                <h3>Russian Federation Forces</h3>
+                <ul>
+                    <li>4-я гвардейская танковая дивизия</li>
+                    <li>19-я отдельная мотострелковая бригада</li>
+                    <li>18-я бригада армейской авиации</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 
- <section class="alert-box">
-        <h3>ENLISTMENT PROTOCOLS</h3>
-        <p>Openings for roles will begin during <strong>late pre-alpha</strong> in controlled waves.</p>
+    <div class="section">
+        <h2>Enlistment Application</h2>
 
-        <form action="https://formsubmit.co/HOTZONE@tutamail.com" method="POST" style="margin-top: 20px; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto;">
-            
-            <input type="text" name="_honey" style="display:none">
-            
+        <form action="https://formsubmit.co/HOTZONE@tutamail.com" method="POST">
+
             <input type="hidden" name="_captcha" value="false">
 
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; font-size: 0.8rem; color: var(--primary-amber);">ROBLOX USERNAME</label>
-                <input type="text" name="Roblox Username" required style="width: 100%; background: #222; border: 1px solid #444; color: white; padding: 10px; font-family: 'Courier New';">
+            <div>
+                <label>Roblox Username</label>
+                <input type="text" name="username" required>
             </div>
 
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; font-size: 0.8rem; color: var(--primary-amber);">PREFERRED UNIT/BRIGADE/DIVISION</label>
-                <input type="text" name="UBD" required style="width: 100%; background: #222; border: 1px solid #444; color: white; padding: 10px; font-family: 'Courier New';">
+            <div>
+                <label>Preferred Unit</label>
+                <input type="text" name="unit" required>
             </div>
 
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; font-size: 0.8rem; color: var(--primary-amber);">PREFERRED FACTION</label>
-                <select name="Faction" style="width: 100%; background: #222; border: 1px solid #444; color: white; padding: 10px; font-family: 'Courier New';">
-                    <option value="NATO">NATO FORCES</option>
-                    <option value="RF">RUSSIAN FEDERATION</option>
+            <div>
+                <label>Faction Preference</label>
+                <select name="faction">
+                    <option>NATO Forces</option>
+                    <option>Russian Federation</option>
                 </select>
             </div>
 
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; font-size: 0.8rem; color: var(--primary-amber);">PREVIOUS MILSIM EXPERIENCE</label>
-                <textarea name="Experience" rows="3" style="width: 100%; background: #222; border: 1px solid #444; color: white; padding: 10px; font-family: 'Courier New'; resize: none;"></textarea>
+            <div>
+                <label>Previous Experience</label>
+                <textarea name="experience" rows="4"></textarea>
             </div>
 
-            <button type="submit" class="btn-enlist" style="width: 100%;">Transmit Application</button>
+            <button type="submit">Submit Application</button>
         </form>
-    </section>
+
+        <p class="note">
+            Applications are reviewed by recruitment staff during active windows.
+        </p>
+    </div>
 
 </div>
 
-<footer style="text-align: center; padding: 40px; font-size: 0.7rem; color: #555;">
-    &copy; 2026 MILITARY SIMULATION OPERATIONS | NO CLASSIFIED DATA BEYOND THIS POINT
+<footer>
+    © 2026 HOTZONE Military Simulation Project • Unauthorized distribution of internal materials is prohibited
 </footer>
 
 </body>
+</html>
